@@ -11,11 +11,12 @@
     "node": true,
     "jest/globals": true
   },
+  "ignorePatterns": [ "node_modules/"],
   "rules": {
     "import/no-commonjs": 0,
     "import/no-nodejs-modules": 0,
     "indent": [ "error", 2, { "SwitchCase": 1 } ],
-    "no-console": 1,
+    "no-console": 0,
     "no-process-exit": 0,
     "no-unused-expressions": 0,
     "no-unused-vars": ["error", { "argsIgnorePattern": "next" }],

@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  populate-hn-data:
+    build: ./container-populate-hn-data
+    environment:
+      - PGUSER=${DB_USER}
+      - PGPASSWORD=${DB_USER_PASSWORD}
+      - PGHOST
+      - PGDATABASE
+      - PGPORT
+      - HOWMANY_STORIES=2
+      
+  postgres:
+    image: postgres:12
+    environment:
+      - POSTGRES_PASSWORD=${DB_ADMIN_PASSWORD}
+    ports:
+      - "5432:5432"
+
+  provision-db:
+    build: ./container-provision-db
+    environment:
+      - PGUSER=${DB_ADMIN}
+      - PGPASSWORD=${DB_ADMIN_PASSWORD}
+      - DB_USER
+      - DB_USER_PASSWORD
+      - PGHOST
+      - PGDATABASE
+      - PGPORT

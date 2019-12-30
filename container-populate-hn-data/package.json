@@ -1,0 +1,23 @@
+{
+  "name": "@whoishiring.work/populate-hn-data",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Populates whoishiring data from hacker news into the database",
+  "license": "MIT",
+  "repository": "https://github.com/jerroydmoore/whoishiring.work.git",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=12.13.0"
+  },
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "debug": "^4.1.1",
+    "node-fetch": "^2.6.0",
+    "pg": "^7.16.1",
+    "pg-hstore": "^2.3.3",
+    "sequelize": "^5.21.3"
+  },
+  "devDependencies": {}
+}

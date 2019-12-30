@@ -1,0 +1,19 @@
+{
+  "name": "@whoishiring.work/provision-db",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Provisions the whoishiring database and tables",
+  "license": "MIT",
+  "repository": "https://github.com/jerroydmoore/whoishiring.work.git",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=12.13.0"
+  },
+  "scripts": {
+    "start": "node ./index.js"
+  },
+  "dependencies": {
+    "pg": "^7.16.1"
+  },
+  "devDependencies": {}
+}

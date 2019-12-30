@@ -1,31 +1,30 @@
 {
-  "name": "boilerplate-nodejs-app",
+  "name": "whoishiring.work",
   "version": "1.0.0",
   "private": true,
-  "description": "Boilerplate Code for a NodeJS App",
+  "description": "Code for the website whoishiring.work",
   "license": "MIT",
-  "repository": "https://github.com/jerroydmoore/boilerplate-nodejs-app.git",
+  "repository": "https://github.com/jerroydmoore/whoishiring.work.git",
   "type": "commonjs",
   "engines": {
     "node": ">=12.13.0"
   },
   "scripts": {
-    "audit": "check-audit --ignoreLow",
-    "audit:resolve": "resolve-audit --ignoreLow",
-    "lint": "eslint *.js src/ __tests__/",
-    "test": "jest",
-    "start": "node src/index.js"
+    "lint": "eslint *.js container-provision-db/ container-populate-hn-data/",
+    "test": "jest"
   },
-  "dependencies": {},
+  "dependencies": {
+    "debug": "^4.1.1",
+    "node-fetch": "^2.6.0"
+  },
   "devDependencies": {
     "eslint": "^6.6.0",
     "eslint-config-node": "^4.0.0",
     "eslint-plugin-jest": "^23.0.4",
     "eslint-plugin-node": "^10.0.0",
-    "husky": "^3.0.9",
+    "husky": "^3.1.0",
     "jest": "^24.8.0",
-    "lint-staged": "^9.4.3",
-    "npm-audit-resolver": "^2.1.0",
+    "lint-staged": "^9.5.0",
     "prettier": "^1.19.1"
   },
   "husky": {
