@@ -25,4 +25,4 @@ USER node
 COPY --from=0 /app .
 COPY ./src ./src/
 
-CMD ./wait-for-it.sh $PGHOST:$PGPORT -- node ./src/index.js
+CMD ./wait-for-it.sh $PGHOST:$PGPORT -- node ./src/cli.js

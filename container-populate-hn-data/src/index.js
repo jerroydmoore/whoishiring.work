@@ -43,7 +43,7 @@ async function loadStory(story) {
   return [totalPostCount, newPostCount, newStoryCount];
 }
 
-async function main() {
+module.exports.main = async function main() {
   try {
     let totalStoryCount = 0;
     const promises = [];
@@ -73,8 +73,8 @@ async function main() {
       [0, 0, 0]
     );
 
-    console.log(`story count (new/total): ${newStoryCount}/${totalStoryCount}`);
-    console.log(`post  count (new/total): ${newPostCount}/${totalPostCount}`);
+    console.log(`story count (new/total): ${newStoryCount}/${totalStoryCount}.`);
+    console.log(`post  count (new/total): ${newPostCount}/${totalPostCount}.`);
     debug('Done!');
   } catch (err) {
     console.error(`MAIN ERR ${err}`);
@@ -82,6 +82,4 @@ async function main() {
   } finally {
     sequelize.close();
   }
-}
-
-main();
+};

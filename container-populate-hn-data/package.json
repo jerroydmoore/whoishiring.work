@@ -10,7 +10,7 @@
     "node": ">=12.13.0"
   },
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/cli.js"
   },
   "dependencies": {
     "debug": "^4.1.1",
