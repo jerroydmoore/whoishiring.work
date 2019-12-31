@@ -10,7 +10,7 @@
     "node": ">=12.13.0"
   },
   "scripts": {
-    "lint": "eslint *.js container-provision-db/ container-populate-hn-data/",
+    "lint": "eslint *.js container-provision-db/ container-populate-hn-data/ container-whoishiring-api/",
     "test": "jest"
   },
   "dependencies": {

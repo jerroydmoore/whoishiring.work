@@ -1,0 +1,29 @@
+{
+  "name": "@whoishiring.work/whoishiring-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API serving whoishiring data",
+  "license": "MIT",
+  "repository": "https://github.com/jerroydmoore/whoishiring.work.git",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=12.13.0"
+  },
+  "scripts": {
+    "start": "node src/server.js | pino-pretty -c -l "
+  },
+  "dependencies": {
+    "aws-serverless-express": "^3.3.6",
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "express-pino-logger": "^4.0.0",
+    "pg": "^7.16.1",
+    "pg-hstore": "^2.3.3",
+    "pino": "^5.15.0",
+    "sequelize": "^5.21.3"
+  },
+  "devDependencies": {
+    "dotenv": "^8.2.0",
+    "pino-pretty": "^3.5.0"
+  }
+}

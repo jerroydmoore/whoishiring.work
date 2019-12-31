@@ -28,3 +28,14 @@ services:
       - PGHOST
       - PGDATABASE
       - PGPORT
+
+  api:
+    build: ./container-whoishiring-api
+    environment: 
+      - DB_USER
+      - DB_USER_PASSWORD
+      - PGHOST
+      - PGDATABASE
+      - PGPORT
+    ports:
+      - "8080:8080"
