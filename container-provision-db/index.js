@@ -50,7 +50,7 @@ function dropTable(pg, name) {
   return pg.query(`DROP TABLE IF EXISTS ${name}`);
 }
 
-async function main() {
+module.exports.main = async function main() {
   let pg;
   const dbname = process.env.PGDATABASE;
 
@@ -112,6 +112,4 @@ async function main() {
   }
 
   console.log('Done!');
-}
-
-main();
+};

@@ -11,9 +11,9 @@ ENTRYPOINT ["/sbin/tini", "--"]
 COPY package.json package-lock.json ./
 RUN npm ci --prod
 
-COPY wait-for-it.sh index.js ./
+COPY wait-for-it.sh index.js cli.js ./
 RUN chmod +x wait-for-it.sh
 
 USER node
 
-CMD ./wait-for-it.sh $PGHOST:$PGPORT -- node index.js
+CMD ./wait-for-it.sh $PGHOST:$PGPORT -- node cli.js
