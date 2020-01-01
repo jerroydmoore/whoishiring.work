@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "Code for the website whoishiring.work",
+  "author": "Jerroyd Moore <jerroydmoore@gmail.com>",
   "license": "MIT",
   "repository": "https://github.com/jerroydmoore/whoishiring.work.git",
   "type": "commonjs",
@@ -10,7 +11,7 @@
     "node": ">=12.13.0"
   },
   "scripts": {
-    "lint": "eslint *.js container-provision-db/ container-populate-hn-data/ container-whoishiring-api/",
+    "lint": "eslint . --ext .js",
     "test": "jest"
   },
   "dependencies": {
@@ -20,8 +21,13 @@
   "devDependencies": {
     "eslint": "^6.6.0",
     "eslint-config-node": "^4.0.0",
+    "eslint-config-react-app": "^5.1.0",
+    "eslint-plugin-flowtype": "^4.5.3",
     "eslint-plugin-jest": "^23.0.4",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-react": "^7.17.0",
+    "eslint-plugin-react-hooks": "^2.3.0",
     "husky": "^3.1.0",
     "jest": "^24.8.0",
     "lint-staged": "^9.5.0",

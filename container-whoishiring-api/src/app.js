@@ -17,6 +17,12 @@ process.on('unhandledRejection', (err /*, promise*/) => {
 const app = express();
 app.use(pino);
 
+// resolve CORS issue
+app.use((req, res, next) => {
+  res.set('Access-Control-Allow-Origin', '*');
+  next();
+});
+
 app.use('/v1/whoishiring', require('./routes/v1/whoishiring'));
 
 app.use('/healthz', (req, res) => res.status(200).json({ message: 'healthy!' }));
