@@ -5,7 +5,7 @@ module.exports = {
   async getListOfMonthLabel({ attributes, limit } = {}) {
     const months = await db.stories.findAll({
       attributes,
-      order: [['postedDate', 'ASC']],
+      order: [['postedDate', 'DESC']],
       limit,
     });
     return months.map((month) => month.label);
