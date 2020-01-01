@@ -12,6 +12,7 @@
   },
   "scripts": {
     "lint": "eslint . --ext .js",
+    "release": "standard-version",
     "test": "jest"
   },
   "dependencies": {
@@ -31,7 +32,8 @@
     "husky": "^3.1.0",
     "jest": "^24.8.0",
     "lint-staged": "^9.5.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "standard-version": "^7.0.1"
   },
   "husky": {
     "hooks": {
