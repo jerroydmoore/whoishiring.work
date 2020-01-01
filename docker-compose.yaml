@@ -2,7 +2,7 @@ version: "3"
 
 services:
   populate-hn-data:
-    build: ./container-populate-hn-data
+    build: ./populate-hn-data
     environment:
       - PGUSER=${DB_USER}
       - PGPASSWORD=${DB_USER_PASSWORD}
@@ -19,7 +19,7 @@ services:
       - "5432:5432"
 
   provision-db:
-    build: ./container-provision-db
+    build: ./provision-db
     environment:
       - PGUSER=${DB_ADMIN}
       - PGPASSWORD=${DB_ADMIN_PASSWORD}
@@ -29,8 +29,8 @@ services:
       - PGDATABASE
       - PGPORT
 
-  api:
-    build: ./container-whoishiring-api
+  backend:
+    build: ./backend
     environment: 
       - DB_USER
       - DB_USER_PASSWORD
