@@ -30,12 +30,18 @@ header {
   margin-bottom: 1.45rem;
 }
 
-.month-picker-placeholder {
-  margin-bottom: 5.3rem;
-}
-
 .job-posting {
   margin-bottom: 1rem;
+}
+
+.postings-header {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+}
+.postings-footer {
+  display: flex;
+  justify-content: flex-end;
 }
 
 footer {

@@ -18,6 +18,10 @@ The frontend is served at http://localhost:8000 and the backend is served at htt
 This is the both the present and WIP features list. If there are features you want added or modified, open a feature request issue.
 
 - [x] Serve HTTPS traffic, and redirect HTTP to HTTPS.
+- [ ] Automate populate HN data.
+- [x] Update URLs for each month.
+- [ ] Pagination.
+- [x] Client-side caching.
 - [ ] Deploy using terraform or cloudformation.
 - [ ] Automate deployments within GitHub.
 - [ ] Add search capability.
