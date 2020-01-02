@@ -18,7 +18,7 @@ The frontend is served at http://localhost:8000 and the backend is served at htt
 This is the both the present and WIP features list. If there are features you want added or modified, open a feature request issue.
 
 - [x] Serve HTTPS traffic, and redirect HTTP to HTTPS.
-- [ ] Automate populate HN data.
+- [x] Automate populate HN data every 15 minutes.
 - [x] Update URLs for each month.
 - [x] Pagination.
 - [x] Client-side caching.
