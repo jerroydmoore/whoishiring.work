@@ -10,6 +10,10 @@ export const latestMonth = new Date().toLocaleDateString('en-US', { month: 'long
 let months = [];
 const jobPostings = new Map();
 
+function transformPost(post) {
+  post.postedDate = new Date(post.postedDate);
+  return post;
+}
 const getLatest = fetch(`${API_URI}/v1/whoishiring/latest`)
   .then((response) => {
     return response.json();
@@ -22,6 +26,7 @@ const getLatest = fetch(`${API_URI}/v1/whoishiring/latest`)
     if (months[0] !== latestMonth) {
       months.unshift(latestMonth);
     }
+    results.posts = results.posts.map(transformPost);
     return results;
   })
   .catch((err) => {
@@ -33,6 +38,7 @@ async function _getJobPostings(month) {
     const response = await fetch(`${API_URI}/v1/whoishiring/months/${month}/posts`);
     if (response.ok) {
       const body = await response.json();
+      body.posts = body.posts.map(transformPost);
       return body;
     }
     console.error(`fetch ${month} failed. status: ${response.status}. ${response.text}`);

@@ -38,6 +38,9 @@ header {
   margin-bottom: 1rem;
 }
 
+.job-posting .authorship {
+  color: #818181;
+}
 .postings-header {
   margin-top: 3rem;
   display: flex;
