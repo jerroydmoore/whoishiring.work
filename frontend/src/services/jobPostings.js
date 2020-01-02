@@ -47,14 +47,33 @@ export async function getMonths() {
   await getLatest;
   return months;
 }
-export async function getJobPostings(month) {
-  // TODO month format validation
-  await getLatest;
-  if (jobPostings.has(month)) {
-    return await jobPostings.get(month);
-  } else {
-    const promise = _getJobPostings(month);
-    jobPostings.set(month, promise);
-    return await promise;
+export async function getJobPostings({ month, page, hitsPerPage }) {
+  if (page < 1) {
+    throw new Error('invalid page value');
   }
+  if (hitsPerPage < 20) {
+    throw new Error('invalid hitsPerPage value. minimum value is 20.');
+  }
+
+  // TODO month format validation
+
+  await getLatest;
+  let promise;
+  if (jobPostings.has(month)) {
+    promise = jobPostings.get(month);
+  } else {
+    promise = _getJobPostings(month);
+    jobPostings.set(month, promise);
+  }
+  const { posts, postsTotal } = await promise;
+  const numberOfPages = Math.ceil(postsTotal / hitsPerPage);
+
+  const start = (page - 1) * hitsPerPage;
+
+  return {
+    posts: posts.slice(start, start + hitsPerPage),
+    postsTotal,
+    numberOfPages,
+    hitsPerPage,
+  };
 }

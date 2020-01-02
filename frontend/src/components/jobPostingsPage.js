@@ -6,6 +6,7 @@ import { getJobPostings, getMonths } from '../services/jobPostings';
 import JobPost from './jobPost';
 import Layout from '../components/layout';
 import MonthPicker from '../components/monthPicker';
+import Pagination from './pagination';
 import PostPlaceholder from './postPlaceholder';
 import SEO from '../components/seo';
 
@@ -13,14 +14,31 @@ const navigateToMonth = (month) => {
   navigate(`/jobPostings?month=${month}`);
 };
 
-const JobPostingsPage = (props) => {
-  const month = props.month;
-  const [errMsg, setErrMsg] = useState(null);
+function validateOptionalDigitParam(value, defaultValue) {
+  value = typeof value === 'undefined' ? defaultValue : value;
+  if (value && /[1-9][0-9]*/.test(value)) {
+    return parseInt(value, 10);
+  }
+}
+
+const JobPostingsPage = ({ month, page, hitsPerPage }) => {
+  console.log(`render JobPostingsPage(${month}, ${page}, ${hitsPerPage})`);
+  page = validateOptionalDigitParam(page, 1);
+  hitsPerPage = validateOptionalDigitParam(hitsPerPage, 20);
+
+  const areParamsOk = page && hitsPerPage;
+
+  const [errMsg, setErrMsg] = useState(areParamsOk ? null : 'Invalid parameters. Check your query string parameters.');
   const [monthList, setMonthList] = useState([]);
   const [jobPostings, setJobPostings] = useState(null);
   const [jobCount, setJobCount] = useState(0);
+  const [maxPage, setMaxPage] = useState(1);
 
   useEffect(() => {
+    if (!areParamsOk) {
+      console.log('params are bad');
+      return;
+    }
     setJobPostings(null);
     setErrMsg(null);
     setJobCount(0);
@@ -28,17 +46,18 @@ const JobPostingsPage = (props) => {
     setTimeout(() => {
       // setTimeout allows the placeholders to render
       // while the large datasets render for large datasets.
-      getJobPostings(month)
-        .then(({ posts, postsTotal }) => {
+      getJobPostings({ month, page, hitsPerPage })
+        .then(({ posts, postsTotal, numberOfPages }) => {
           setJobPostings(posts);
           setJobCount(postsTotal);
+          setMaxPage(numberOfPages);
         })
         .catch((err) => {
           console.error(err);
           setErrMsg(err.message);
         });
     }, 1);
-  }, [month]);
+  }, [areParamsOk, month, page, hitsPerPage]);
   useEffect(() => {
     getMonths()
       .then(setMonthList)
@@ -48,11 +67,23 @@ const JobPostingsPage = (props) => {
       });
   }, []);
 
+  const updatePage = (newPage) => {
+    navigate(`/jobPostings?month=${month}&hitsPerPage=${hitsPerPage}&page=${newPage}`);
+    page = newPage;
+  };
+
+  const pagination = !errMsg && jobPostings && jobPostings.length > 0 && (
+    <Pagination active={page} max={maxPage} onChange={updatePage} />
+  );
+
   return (
     <Layout>
       <SEO title={month} />
-      <MonthPicker selected={month} jobCount={jobCount} items={monthList} onChange={navigateToMonth} />
-      {errMsg && <div>Error: ${errMsg}</div>}
+      <div className="postings-header">
+        <MonthPicker selected={month} jobCount={jobCount} items={monthList} onChange={navigateToMonth} />
+        {pagination}
+      </div>
+      {errMsg && <div>Error: {errMsg}</div>}
       {!errMsg && !jobPostings && (
         <>
           <PostPlaceholder />
@@ -67,6 +98,8 @@ const JobPostingsPage = (props) => {
         </div>
       )}
       {jobPostings && jobPostings.length > 0 && jobPostings.map((job) => <JobPost key={job.id} job={job} />)}
+
+      <div className="postings-footer">{pagination}</div>
     </Layout>
   );
 };

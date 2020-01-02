@@ -20,7 +20,7 @@ This is the both the present and WIP features list. If there are features you wa
 - [x] Serve HTTPS traffic, and redirect HTTP to HTTPS.
 - [ ] Automate populate HN data.
 - [x] Update URLs for each month.
-- [ ] Pagination.
+- [x] Pagination.
 - [x] Client-side caching.
 - [ ] Deploy using terraform or cloudformation.
 - [ ] Automate deployments within GitHub.

@@ -30,6 +30,10 @@ header {
   margin-bottom: 1.45rem;
 }
 
+.pagination-control {
+  white-space: nowrap;
+}
+
 .job-posting {
   margin-bottom: 1rem;
 }
@@ -38,6 +42,7 @@ header {
   margin-top: 3rem;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .postings-footer {
   display: flex;
@@ -45,7 +50,7 @@ header {
 }
 
 footer {
-  /* margin-bottom: 1rem; */
+  margin-top: 1rem;
   background-color: #f5f5f5;
   width: 100%;
 }
