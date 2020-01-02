@@ -10,9 +10,10 @@ import Pagination from './pagination';
 import PostPlaceholder from './postPlaceholder';
 import SEO from '../components/seo';
 
-const navigateToMonth = (month) => {
-  navigate(`/jobPostings?month=${month}`);
-};
+const encodeUriParam = (param) => encodeURIComponent(param).replace(/%20/g, '+');
+function gotoJobPostings(month, page = 1, hitsPerPage = 20) {
+  navigate(`/jobPostings?month=${encodeUriParam(month)}&hitsPerPage=${hitsPerPage}&page=${page}`);
+}
 
 function validateOptionalDigitParam(value, defaultValue) {
   value = typeof value === 'undefined' ? defaultValue : value;
@@ -68,8 +69,7 @@ const JobPostingsPage = ({ month, page, hitsPerPage }) => {
   }, []);
 
   const updatePage = (newPage) => {
-    navigate(`/jobPostings?month=${month}&hitsPerPage=${hitsPerPage}&page=${newPage}`);
-    page = newPage;
+    gotoJobPostings(month, newPage, hitsPerPage);
   };
 
   const pagination = !errMsg && jobPostings && jobPostings.length > 0 && (
@@ -80,7 +80,7 @@ const JobPostingsPage = ({ month, page, hitsPerPage }) => {
     <Layout>
       <SEO title={month} />
       <div className="postings-header">
-        <MonthPicker selected={month} jobCount={jobCount} items={monthList} onChange={navigateToMonth} />
+        <MonthPicker selected={month} jobCount={jobCount} items={monthList} onChange={gotoJobPostings} />
         {pagination}
       </div>
       {errMsg && <div>Error: {errMsg}</div>}
