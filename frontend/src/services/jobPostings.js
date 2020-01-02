@@ -53,6 +53,8 @@ export async function getMonths() {
   await getLatest;
   return months;
 }
+
+const monthRegex = /^(January|Feburary|March|April|May|June|July|August|September|October|November|December) 20\d\d$/;
 export async function getJobPostings({ month, page, hitsPerPage }) {
   if (page < 1) {
     throw new Error('invalid page value');
@@ -60,8 +62,9 @@ export async function getJobPostings({ month, page, hitsPerPage }) {
   if (hitsPerPage < 20) {
     throw new Error('invalid hitsPerPage value. minimum value is 20.');
   }
-
-  // TODO month format validation
+  if (!monthRegex.test(month)) {
+    throw new Error(`${month} is not a valid month.`);
+  }
 
   await getLatest;
   let promise;
