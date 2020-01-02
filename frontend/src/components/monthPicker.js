@@ -8,7 +8,7 @@ const MonthPicker = ({ selected, jobCount, items, onChange }) => (
     </Dropdown.Toggle>
     <Dropdown.Menu>
       {items.map((item) => (
-        <Dropdown.Item key={item} onClick={() => onChange(item)}>
+        <Dropdown.Item key={item} onClick={() => selected !== item && onChange(item)}>
           {item}
         </Dropdown.Item>
       ))}
