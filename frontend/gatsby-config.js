@@ -1,6 +1,7 @@
 const short_name = 'Who is Hiring';
 const title = `HN: ${short_name}?`;
 const description = 'Aggregate, filter, and seach for monthly jobs posted on AskHN: Who is Hiring?';
+
 module.exports = {
   siteMetadata: {
     title,
@@ -34,5 +35,20 @@ module.exports = {
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
+    {
+      resolve: 'gatsby-plugin-s3',
+      options: {
+        bucketName: 'www.whoishiring.work',
+        // generateRedirectObjectsForPermanentRedirects: true,
+        protocol: 'https',
+        hostname: 'www.whoishiring.work',
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: 'https://www.whoishiring.work',
+      },
+    },
   ],
 };
