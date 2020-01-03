@@ -1,5 +1,6 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
+import { Markup } from 'interweave';
 
 const JobPost = ({ job }) => {
   const endOfTitle = job.body.indexOf('<p>');
@@ -9,10 +10,10 @@ const JobPost = ({ job }) => {
     <Card className="job-posting">
       <Card.Body>
         <Card.Title>
-          <div dangerouslySetInnerHTML={{ __html: title }}></div>
+          <Markup content={title} />
         </Card.Title>
         <Card.Text>
-          <div dangerouslySetInnerHTML={{ __html: body }}></div>
+          <Markup content={body} />
           <small className="authorship">
             Posted on{' '}
             <a
