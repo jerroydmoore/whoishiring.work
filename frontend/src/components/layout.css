@@ -23,6 +23,11 @@ header {
   display: inline-block
 }
 
+.filter-controls {
+  background-color: #F6F6EF;
+  border: 0;
+}
+
 .active-month {
   border: #000000 solid 1px;
   background: transparent;

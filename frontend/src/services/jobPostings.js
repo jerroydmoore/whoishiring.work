@@ -21,6 +21,27 @@ function transformPost(post) {
   post.body = post.body.substr(endOfTitle);
   return post;
 }
+
+const filterRegex = {
+  onsite: /\bon\s*site\b/i,
+  remote: /\bremote\b/i,
+  intern: /\binterns?\b/i,
+  visa: /\bvisa\b/i,
+};
+function filterPosts(filterFlags, searchPattern) {
+  const searchRegex = searchPattern && new RegExp(searchPattern);
+  return (post) => {
+    for (const [name, isFilterOn] of Object.entries(filterFlags)) {
+      if (isFilterOn && !filterRegex[name].test(post._body)) {
+        return false;
+      }
+      if (searchRegex && !searchRegex.test(post._body)) {
+        return false;
+      }
+    }
+    return true;
+  };
+}
 const getLatest = fetch(`${API_URI}/v1/whoishiring/latest`)
   .then((response) => {
     return response.json();
@@ -62,7 +83,7 @@ export async function getMonths() {
 }
 
 const monthRegex = /^(January|Feburary|March|April|May|June|July|August|September|October|November|December) 20\d\d$/;
-export async function getJobPostings({ month, page, hitsPerPage }) {
+export async function getJobPostings({ month, page, hitsPerPage, sort, searchPattern, filterFlags }) {
   if (page < 1) {
     throw new Error('invalid page value');
   }
@@ -81,10 +102,32 @@ export async function getJobPostings({ month, page, hitsPerPage }) {
     promise = _getJobPostings(month);
     jobPostings.set(month, promise);
   }
-  const { posts, postsTotal } = await promise;
-  const numberOfPages = Math.ceil(postsTotal / hitsPerPage);
+  let { posts, postsTotal } = await promise;
 
   const start = (page - 1) * hitsPerPage;
+
+  const descending = sort[0] === '-';
+  if (descending) {
+    sort = sort.substr(1);
+  }
+  posts.sort((a, b) => {
+    a = a[sort];
+    b = b[sort];
+
+    if (typeof a === 'string') {
+      return a.localeCompare(b);
+    } else if (typeof a === 'number' || a instanceof Date) {
+      return a - b;
+    } else {
+      throw new Error(`${typeof a} is unsortable`);
+    }
+  });
+  if (descending) {
+    posts.reverse();
+  }
+  posts = posts.filter(filterPosts(filterFlags, searchPattern));
+  const numberOfPages = Math.ceil(posts.length / hitsPerPage);
+  console.log(`search result count: ${posts.length}`);
 
   return {
     posts: posts.slice(start, start + hitsPerPage),

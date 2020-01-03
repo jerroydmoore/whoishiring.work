@@ -24,9 +24,9 @@ This is the both the present and WIP features list. If there are features you wa
 - [x] Client-side caching.
 - [ ] Deploy using terraform or cloudformation.
 - [ ] Automate deployments within GitHub.
-- [ ] Add search capability.
-- [ ] Add filtering capabilities: on-site, new, noted, applied, hidden, etc.
-- [ ] Add sorting capabilities: posted date, popularity, view count, company.
+- [x] Add search capability.
+- [x] Add filtering capabilities: on-site, new, noted, applied, hidden, etc.
+- [x] Add sorting capabilities: posted date, popularity, view count, company.
 - [ ] Add notes capability: users can manage private notes per post.
 - [ ] Add capability to upvote or downvote.
 - [ ] Add discussions.

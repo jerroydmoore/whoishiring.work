@@ -3,17 +3,14 @@ import { Card } from 'react-bootstrap';
 import { Markup } from 'interweave';
 
 const JobPost = ({ job }) => {
-  const endOfTitle = job.body.indexOf('<p>');
-  const title = job.body.substr(0, endOfTitle);
-  const body = job.body.substr(endOfTitle);
   return (
     <Card className="job-posting">
       <Card.Body>
         <Card.Title>
-          <Markup content={title} />
+          <Markup content={job.title} />
         </Card.Title>
         <Card.Text>
-          <Markup content={body} />
+          <Markup content={job.body} />
           <small className="authorship">
             Posted on{' '}
             <a
