@@ -12,6 +12,13 @@ const jobPostings = new Map();
 
 function transformPost(post) {
   post.postedDate = new Date(post.postedDate);
+  let endOfTitle = post.body.indexOf('<p>');
+  if (endOfTitle < 0) {
+    endOfTitle = post.body.length; // body is simply one line
+  }
+  post._body = post.body;
+  post.title = post.body.substr(0, endOfTitle);
+  post.body = post.body.substr(endOfTitle);
   return post;
 }
 const getLatest = fetch(`${API_URI}/v1/whoishiring/latest`)
