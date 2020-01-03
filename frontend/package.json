@@ -10,6 +10,7 @@
     "build": "gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
+    "deploy": "aws s3 rm --recursive --exclude *.html s3://www.whoishiring.work && aws s3 cp --recursive public/ s3://www.whoishiring.work/",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
