@@ -13,6 +13,9 @@ npm run develop
 
 The frontend is served at http://localhost:8000 and the backend is served at http://localhost:8080
 
+#### Limitations
+The populate-hn-data function only runs once, whereas it runs every 15 minutes in production. If you need fresher data, re-run the function locally or point your frontend to consume the production API endpoint.
+
 ## Features
 
 This is the both the present and WIP features list. If there are features you want added or modified, open a feature request issue.
@@ -32,3 +35,24 @@ This is the both the present and WIP features list. If there are features you wa
 - [ ] Add discussions.
 - [ ] Add threaded discussions.
 - [ ] Integrate with GitHub OAuth.
+
+
+## The Production Environment
+
+All containers run in lambda functions with a manual trigger, except the populate-hn-data lambda function which runs every 15 minutes.
+The static assests from the frontend are copied into a S3 bucket with website capabilities turned on. CloudFront for this S3 website is enabled for caching and https services. The backend lambda function sits behind an API Gateway instance.
+
+One key limitation to hosting gatsbyJS projects in S3 buckets, is Cloudfront does not redirect urls with subfolders to the subfolder's index.html. This limitation was resolved using a Lambda@Edge function with a Cloudfront trigger to redirect urls missing the index.html.
+
+### Deploying to Production
+
+Most items are deployed manually into AWS. This will be automated eventually.
+
+#### Deploying the Frontend
+
+```sh
+cd ./frontend
+npm run deploy
+```
+
+Note that your AWS credentials must be set in order to run the deploy script.
