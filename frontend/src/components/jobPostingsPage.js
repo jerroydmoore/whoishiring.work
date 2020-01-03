@@ -22,7 +22,7 @@ function gotoJobPostingsPage(month, params = '') {
   if (params.length > 0) {
     params = '&' + params;
   }
-  navigate(`/jobPostings?month=${encodeUriParam(month)}${params}`);
+  navigate(`/jobPostings/?month=${encodeUriParam(month)}${params}`);
 }
 
 function validateOptionalDigitParam(value, defaultValue) {
