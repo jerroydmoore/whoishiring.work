@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/jerroydmoore/whoishiring.work/compare/v1.1.1...v1.2.0) (2020-01-06)
+
+
+### Features
+
+* **frontend:** constrict the main content to 50rem ([0acdb4e](https://github.com/jerroydmoore/whoishiring.work/commit/0acdb4ea34bebf10e5ab8a48524da24c6a8b73b9))
+* **frontend:** users can add notes to posts ([04cceb8](https://github.com/jerroydmoore/whoishiring.work/commit/04cceb8ce38d9955612a412b8a12d7f0adcd1cb8))
+* **frontend:** users can mark posts as applied ([ce60fa6](https://github.com/jerroydmoore/whoishiring.work/commit/ce60fa65587134f7320d5ace1af9759e38f0c917))
+
 ### [1.1.1](https://github.com/jerroydmoore/whoishiring.work/compare/v1.1.0...v1.1.1) (2020-01-03)
 
 
