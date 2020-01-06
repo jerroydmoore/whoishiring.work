@@ -166,11 +166,14 @@ const JobPostingsPage = ({
           <PostPlaceholder />
         </>
       )}
-      {jobPostings && jobPostings.length === 0 && (
+      {jobPostings && jobCount === 0 && (
         <div>
           Jobs are not available for this month. Try picking a different month. Jobs are typically posted on the first
           of each month approximately 11AM PST.
         </div>
+      )}
+      {jobPostings && jobCount > 0 && jobPostings.length === 0 && (
+        <div>No results match your search criteria. Try adjusting your filters.</div>
       )}
       {jobPostings && jobPostings.length > 0 && jobPostings.map((job) => <JobPost key={job.id} job={job} />)}
 
