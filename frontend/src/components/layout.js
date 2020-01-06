@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
           </Link>
         </nav>
       </header>
-      <main className="container">{children}</main>
+      <main>{children}</main>
       <footer>
         <div className="footer">
           <a className="githubLink" href="https://github.com/jerroydmoore/whoishiring.work" rel="nofollow">

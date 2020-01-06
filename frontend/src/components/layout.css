@@ -23,6 +23,14 @@ header {
   display: inline-block
 }
 
+main {
+  max-width: 50rem;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 .filter-controls {
   background-color: #F6F6EF;
   border: 0;
