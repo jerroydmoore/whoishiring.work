@@ -11,9 +11,9 @@ export const latestMonth = new Date().toLocaleDateString('en-US', { month: 'long
 let months = [];
 const jobPostings = new Map();
 
-async function transformJobPostingsBody({ posts, postTotal }) {
+async function transformJobPostingsBody({ posts, postsTotal }) {
   posts = await Promise.all(posts.map(transformPost));
-  return { posts, postTotal };
+  return { posts, postsTotal };
 }
 
 async function transformPost(post) {
