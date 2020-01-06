@@ -79,7 +79,7 @@ const FilterControls = ({ onChange, searchPattern: initialSearchPattern, sort, f
     <Container>
       <Card className="filter-controls">
         <Card.Body>
-          <h5>Advanced Search:</h5>
+          <h5>Search Criteria:</h5>
           <form onSubmit={handleSubmit}>
             <FormGroup as={Row}>
               <Form.Label column xs={12} sm={3} md={2} id="searchTitleLabel">
