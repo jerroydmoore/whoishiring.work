@@ -30,10 +30,14 @@ This is the both the present and WIP features list. If there are features you wa
 - [x] Add search capability.
 - [x] Add filtering capabilities: on-site, new, noted, applied, hidden, etc.
 - [x] Add sorting capabilities: posted date, popularity, view count, company.
+- [ ] Add applied capabilities: each user can mark posts as "applied"
 - [ ] Add notes capability: users can manage private notes per post.
-- [ ] Add capability to upvote or downvote.
-- [ ] Add discussions.
-- [ ] Add threaded discussions.
+- [ ] Add Ratings: users can rate each post and sort by rating
+- [ ] Users can mark posts as unread and filter posts by read/unread.
+- [ ] Users can hide posts, can undo hiding posts, and can filter posts by visibility.
+- [ ] Save searches as culstom filters.
+- [ ] Add support for boolean OR and ANDs in searches.
+- [ ] Add ability to only show new posts since the last time the user visited.
 - [ ] Integrate with GitHub OAuth.
 
 
