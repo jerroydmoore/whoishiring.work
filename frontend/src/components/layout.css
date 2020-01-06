@@ -75,6 +75,15 @@ main {
   border: 0;
 }
 
+.job-posting .user-notes {
+  background-color: #fff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125)
+}
+.job-posting .user-notes textarea {
+  border-radius: 0;
+  border: 0;
+}
+
 .postings-footer {
   display: flex;
   justify-content: flex-end;
