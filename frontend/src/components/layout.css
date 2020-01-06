@@ -60,6 +60,21 @@ main {
   justify-content: space-between;
   flex-wrap: wrap;
 }
+
+.post-actionbar {
+  font-size: 80%;
+  font-weight: 400;
+  background-color: #F6F6F6;
+}
+
+.post-actionbar > button {
+  background-color: inherit;
+  font-size: inherit;
+  font-weight: 400;
+  padding: 0;
+  border: 0;
+}
+
 .postings-footer {
   display: flex;
   justify-content: flex-end;

@@ -1,4 +1,5 @@
 import fetch from 'node-fetch';
+import * as userPostService from './userPost';
 
 const API_URI = process.env.GATSBY_API_URI || 'http://localhost:8080';
 if (!process.env.GATSBY_API_URI) {
@@ -10,7 +11,12 @@ export const latestMonth = new Date().toLocaleDateString('en-US', { month: 'long
 let months = [];
 const jobPostings = new Map();
 
-function transformPost(post) {
+async function transformJobPostingsBody({ posts, postTotal }) {
+  posts = await Promise.all(posts.map(transformPost));
+  return { posts, postTotal };
+}
+
+async function transformPost(post) {
   post.postedDate = new Date(post.postedDate);
   let endOfTitle = post.body.indexOf('<p>');
   if (endOfTitle < 0) {
@@ -19,7 +25,10 @@ function transformPost(post) {
   post._body = post.body;
   post.title = post.body.substr(0, endOfTitle);
   post.body = post.body.substr(endOfTitle);
-  return post;
+
+  const userPosts = await userPostService.findOrCreate(post.id);
+
+  return { userPosts, ...post };
 }
 
 const filterRegex = {
@@ -42,20 +51,20 @@ function filterPosts(filterFlags, searchPattern) {
     return true;
   };
 }
+
 const getLatest = fetch(`${API_URI}/v1/whoishiring/latest`)
   .then((response) => {
     return response.json();
   })
   .then((results) => {
     months = results.months;
-    delete results.months;
     jobPostings.set(months[0], getLatest);
 
     if (months[0] !== latestMonth) {
       months.unshift(latestMonth);
     }
-    results.posts = results.posts.map(transformPost);
-    return results;
+
+    return transformJobPostingsBody(results);
   })
   .catch((err) => {
     console.log(`fetch error ${err}`);
@@ -66,10 +75,10 @@ async function _getJobPostings(month) {
     const response = await fetch(`${API_URI}/v1/whoishiring/months/${month}/posts`);
     if (response.ok) {
       const body = await response.json();
-      body.posts = body.posts.map(transformPost);
-      return body;
+      return transformJobPostingsBody(body);
     }
     console.error(`fetch ${month} failed. status: ${response.status}. ${response.text}`);
+
     return { posts: [], postTotal: 0 };
   } catch (err) {
     console.log(`fetch ${month} err: ${err}`);
@@ -81,6 +90,26 @@ export async function getMonths() {
   await getLatest;
   return months;
 }
+
+// TODO save this to the db
+export async function updateUserJobPostField(month, postId, field, value) {
+  if (!jobPostings.has(month)) {
+    console.error(`updateUserJobPostField err: no posts for month ${months}`);
+    return false;
+  }
+
+  const { posts } = await jobPostings.get(month);
+  const post = posts.find((post) => post.id === postId);
+  if (!post) {
+    console.error(`updateUserJobPostField err: no posts for id ${postId}`);
+    return false;
+  }
+  await randomWait();
+  console.log(`updated ${postId}`);
+  post.userPosts[field] = value;
+  return true;
+}
+const randomWait = () => new Promise((resolve) => setTimeout(resolve, Math.floor(Math.random() * 1000)));
 
 const monthRegex = /^(January|Feburary|March|April|May|June|July|August|September|October|November|December) 20\d\d$/;
 export async function getJobPostings({ month, page, hitsPerPage, sort, searchPattern, filterFlags }) {
@@ -115,7 +144,7 @@ export async function getJobPostings({ month, page, hitsPerPage, sort, searchPat
     b = b[sort];
 
     if (typeof a === 'string') {
-      return a.localeCompare(b);
+      return a.localeCompare(b, { sensitivity: 'base', ignorePunctuation: true });
     } else if (typeof a === 'number' || a instanceof Date) {
       return a - b;
     } else {
