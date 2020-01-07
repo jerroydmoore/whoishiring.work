@@ -39,6 +39,7 @@ This is the both the present and WIP features list. If there are features you wa
 - [ ] Add support for boolean OR and ANDs in searches.
 - [ ] Add ability to only show new posts since the last time the user visited.
 - [ ] Integrate with GitHub OAuth.
+- [ ] Dark Mode.
 
 
 ## The Production Environment
