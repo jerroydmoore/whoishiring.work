@@ -45,7 +45,7 @@ This is the both the present and WIP features list. If there are features you wa
 ## The Production Environment
 
 All containers run in lambda functions with a manual trigger, except the populate-hn-data lambda function which runs every 15 minutes.
-The static assests from the frontend are copied into a S3 bucket with website capabilities turned on. CloudFront for this S3 website is enabled for caching and https services. The backend lambda function sits behind an API Gateway instance.
+The static assets from the frontend are copied into a S3 bucket with website capabilities turned on. CloudFront for this S3 website is enabled for caching and https services. The backend lambda function sits behind an API Gateway instance.
 
 One key limitation to hosting gatsbyJS projects in S3 buckets, is Cloudfront does not redirect urls with subfolders to the subfolder's index.html. This limitation was resolved using a Lambda@Edge function with a Cloudfront trigger to redirect urls missing the index.html.
 
