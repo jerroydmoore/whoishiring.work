@@ -87,7 +87,7 @@ const FilterControls = ({ onChange, searchPattern: initialSearchPattern, sort, f
               </Form.Label>
               <Col xs={12} sm={9} md={10}>
                 <FormControl
-                  placeholder='Use regular expessions to search among posts, e.g. "(sf|san francisco)"'
+                  placeholder='Use regular expressions to search among posts, e.g. "(sf|san francisco)"'
                   aria-describedby="searchTitleLabel"
                   value={searchPattern}
                   onChange={updateFromFromControl(setSearchPattern)}
