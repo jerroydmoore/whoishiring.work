@@ -77,7 +77,7 @@ module.exports.main = async function main() {
     console.log(`post  count (new/total): ${newPostCount}/${totalPostCount}.`);
     debug('Done!');
   } catch (err) {
-    console.error(`MAIN ERR ${err}`);
+    console.error(`MAIN ERR ${err}. stack: ${err.stack}`);
     process.exit(1);
   } finally {
     sequelize.close();

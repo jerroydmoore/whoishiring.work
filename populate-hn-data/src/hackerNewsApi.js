@@ -49,7 +49,7 @@ module.exports = {
       if (whoIsHiringRegex.test(item.title)) {
         yield item;
       } else {
-        debug(`getWhoIsHiringStories: skipping topic ${item.title}`);
+        debug(`getWhoIsHiringStories: skipping topic "${item.title}" (ID: ${item.objectID})`);
       }
     }
   },

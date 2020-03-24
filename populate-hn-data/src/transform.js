@@ -2,11 +2,13 @@ const whoIsHiringRegex = /^Ask HN: Who is hiring\?\s*\(([^)]+)\)\s*$/;
 
 module.exports.story = function transformStory(story) {
   const res = whoIsHiringRegex.exec(story.title);
-  const label = res[1];
 
-  if (!label) {
+  if (!res || !res[1]) {
+    console.warn(`Unable to transform story "${story.title}" (ID: ${story.objectID})`);
+    console.log(story);
     return;
   }
+  const label = res[1];
 
   return {
     id: parseInt(story.objectID, 10),
