@@ -6,12 +6,18 @@ const { stories, posts, sequelize } = require('./models');
 const HOWMANY_STORIES = parseInt(process.env.HOWMANY_STORIES, 10) || 1;
 
 async function loadStory(story) {
-  const [, isNewStory] = await stories.findOrCreate({
-    where: { id: story.id },
-    defaults: story,
-  });
+  let newStoryCount = 0;
+  try {
+    const [, isNewStory] = await stories.findOrCreate({
+      where: { id: story.id },
+      defaults: story,
+    });
+    newStoryCount = isNewStory ? 1 : 0;
+  } catch (err) {
+    console.error(`loadStory: Unable to findOrCreate story "${story.label}": ${err}. stack: ${err.stack}`);
+    return [0, 0, 0];
+  }
 
-  const newStoryCount = isNewStory ? 1 : 0;
   const promises = [];
   let totalPostCount = 0;
   let newPostCount = 0;
