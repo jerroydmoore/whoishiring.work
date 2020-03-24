@@ -3,6 +3,9 @@ version: "3"
 services:
   populate-hn-data:
     build: ./populate-hn-data
+    depends_on: 
+      - "postgres"
+      - "provision-db"
     environment:
       - PGUSER=${DB_USER}
       - PGPASSWORD=${DB_USER_PASSWORD}
@@ -10,6 +13,7 @@ services:
       - PGDATABASE
       - PGPORT
       - HOWMANY_STORIES=2
+      - DEBUG
       
   postgres:
     image: postgres:12
@@ -20,6 +24,8 @@ services:
 
   provision-db:
     build: ./provision-db
+    depends_on: 
+      - "postgres"
     environment:
       - PGUSER=${DB_ADMIN}
       - PGPASSWORD=${DB_ADMIN_PASSWORD}
@@ -31,6 +37,8 @@ services:
 
   backend:
     build: ./backend
+    depends_on: 
+      - "postgres"
     environment: 
       - DB_USER
       - DB_USER_PASSWORD
