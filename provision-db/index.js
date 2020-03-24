@@ -72,7 +72,7 @@ module.exports.main = async function main() {
       pg,
       'whoishiring_stories',
       `id INTEGER PRIMARY KEY,
-      "label" varchar(14) NOT NULL,
+      "label" varchar(40) NOT NULL,
       "postedDate" TIMESTAMP NOT NULL,
       "createdAt" TIMESTAMP NOT NULL,
       "updatedAt" TIMESTAMP NOT NULL`
@@ -93,6 +93,9 @@ module.exports.main = async function main() {
       "createdAt" TIMESTAMP NOT NULL,
       "updatedAt" TIMESTAMP NOT NULL`
     );
+
+    // TODO delete after executing once
+    await pg.query('ALTER TABLE "whoishiring_stories" ALTER COLUMN label TYPE varchar(40);');
 
     // allow RW on tables for the DB_USER
     await pg.query(

@@ -39,13 +39,22 @@ function validateStringOfList(value, list, defaultValue) {
 }
 
 const JobPostingsPage = ({
-  month,
+  month: initialMonth,
   page: initialPageValue,
   hitsPerPage: initialHitsPerPage,
   sort: initialSortValue,
   filterFlags,
   searchPattern,
 }) => {
+  // month can be null. If month is null, it will be set to latest month
+  // However, when the user changes month, the change propagates in initialMonth
+  // We detect this with initialMonth !== month
+  // while guarding against month being null and being updated programmatically.
+  const [month, setMonth] = useState(initialMonth);
+  if (initialMonth !== null && initialMonth !== month) {
+    setMonth(initialMonth);
+  }
+
   filterFlags = filterFlags || {};
   function updateJobPostingsPage(opts) {
     opts = {
@@ -69,7 +78,7 @@ const JobPostingsPage = ({
   }
   console.log(
     `render JobPostingsPage(${JSON.stringify({
-      month,
+      month: initialMonth,
       page: initialPageValue,
       searchPattern,
       sort: initialSortValue,
@@ -109,6 +118,11 @@ const JobPostingsPage = ({
     setErrMsg(null);
     setJobCount(0);
 
+    // month can be null. Set it to the latest month
+    if (!month) {
+      getMonths().then((months) => setMonth(months[0]));
+      return;
+    }
     setTimeout(() => {
       // setTimeout allows the placeholders to render
       // while the large datasets render for large datasets.
@@ -155,7 +169,12 @@ const JobPostingsPage = ({
 
       <FilterControls onChange={onFilterChange} searchPattern={searchPattern} filterFlags={filterFlags} sort={sort} />
       <div className="postings-header">
-        <MonthPicker selected={month} jobCount={jobCount} items={monthList} onChange={gotoJobPostingsPage} />
+        <MonthPicker
+          selected={month || 'Loading...'}
+          jobCount={jobCount}
+          items={monthList}
+          onChange={gotoJobPostingsPage}
+        />
         {pagination}
       </div>
       {errMsg && <div>Error: {errMsg}</div>}

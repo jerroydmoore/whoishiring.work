@@ -9,7 +9,7 @@ const JobPostings = (props) => {
 
   return (
     <JobPostingsPage
-      month={props.search.month}
+      month={props.search.month || null}
       page={props.search.page}
       hitsPerPage={props.search.hitsPerPage}
       searchPattern={props.search.searchPattern}

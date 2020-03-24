@@ -6,8 +6,6 @@ if (!process.env.GATSBY_API_URI) {
   console.warn('GATSBY_API_URL is not set');
 }
 
-export const latestMonth = new Date().toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
-
 let months = [];
 const jobPostings = new Map();
 
@@ -60,10 +58,6 @@ const getLatest = fetch(`${API_URI}/v1/whoishiring/latest`)
     months = results.months;
     jobPostings.set(months[0], getLatest);
 
-    if (months[0] !== latestMonth) {
-      months.unshift(latestMonth);
-    }
-
     return transformJobPostingsBody(results);
   })
   .catch((err) => {
@@ -111,7 +105,6 @@ export async function updateUserJobPostField(month, postId, field, value) {
 }
 const randomWait = () => new Promise((resolve) => setTimeout(resolve, Math.floor(Math.random() * 1000)));
 
-const monthRegex = /^(January|Feburary|March|April|May|June|July|August|September|October|November|December) 20\d\d$/;
 export async function getJobPostings({ month, page, hitsPerPage, sort, searchPattern, filterFlags }) {
   if (page < 1) {
     throw new Error('invalid page value');
@@ -119,11 +112,9 @@ export async function getJobPostings({ month, page, hitsPerPage, sort, searchPat
   if (hitsPerPage < 20) {
     throw new Error('invalid hitsPerPage value. minimum value is 20.');
   }
-  if (!monthRegex.test(month)) {
-    throw new Error(`${month} is not a valid month.`);
-  }
 
   await getLatest;
+  month = month || months[0]; // default is the latest
   let promise;
   if (jobPostings.has(month)) {
     promise = jobPostings.get(month);

@@ -3,7 +3,9 @@ const { URL } = require('url');
 const fetch = require('node-fetch');
 
 const HACKERNEWS_API_URL = 'http://hn.algolia.com/api/v1/search_by_date';
-const whoIsHiringRegex = /^Ask HN: Who is hiring\?/;
+// COVID-19 special post does not follow regex by adding the "right now" phrase:
+// https://news.ycombinator.com/item?id=22665398
+const whoIsHiringRegex = /^Ask HN: Who is hiring( right now)?\?/;
 
 module.exports = {
   async *getItems(params, hitsPerPage = 100, page = 0) {
