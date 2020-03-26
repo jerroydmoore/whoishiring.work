@@ -4,7 +4,6 @@ services:
   populate-hn-data:
     build: ./populate-hn-data
     depends_on: 
-      - "postgres"
       - "provision-db"
     environment:
       - PGUSER=${DB_USER}
@@ -38,7 +37,7 @@ services:
   backend:
     build: ./backend
     depends_on: 
-      - "postgres"
+      - "populate-hn-data"
     environment: 
       - DB_USER
       - DB_USER_PASSWORD
@@ -47,3 +46,15 @@ services:
       - PGPORT
     ports:
       - "8080:8080"
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: development.Dockerfile
+    depends_on: 
+      - "backend"
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules/
+    command: gatsby develop -H 0.0.0.0 -p 8000
