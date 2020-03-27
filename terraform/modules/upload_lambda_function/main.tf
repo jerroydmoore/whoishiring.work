@@ -113,7 +113,7 @@ resource "aws_lambda_function" "function" {
 
   runtime     = "nodejs12.x"
   memory_size = 128
-  timeout     = 60
+  timeout     = var.timeout
 
   environment {
     variables = var.environment

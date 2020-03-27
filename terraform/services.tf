@@ -40,3 +40,27 @@ module "populate_hn_data" {
     Application = var.application_id
   }
 }
+
+module "provision_db" {
+  source = "./modules/upload_lambda_function"
+
+  name        = "provision-db"
+  prefix      = var.application_id
+  description = "Sets the database schema"
+  source_dir  = "../provision-db"
+  handler     = "index.main"
+  timeout     = 90
+
+  environment = {
+    DB_USER = var.db_user
+    DB_USER_PASSWORD = var.db_user_password
+    PGHOST          = aws_db_instance.whoishiring.address
+    PGDATABASE      = var.db_name
+    PGPORT          = aws_db_instance.whoishiring.port
+    PGUSER          = var.db_master_user
+    PGPASSWORD      = var.db_master_password
+  }
+  tags = {
+    Application = var.application_id
+  }
+}

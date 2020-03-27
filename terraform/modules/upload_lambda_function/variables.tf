@@ -6,7 +6,6 @@ variable "prefix" {
   description = "(Optional) A name prefix for all associated resources"
 }
 
-
 variable "description" {
   description = "(Optional) Description of what your Lambda Function does."
   default = ""
@@ -18,6 +17,11 @@ variable "source_dir" {
 
 variable "handler" {
   description = "(Required) The function entrypoint in your code"
+}
+
+variable "timeout" {
+  default     = 60
+  description = "(Optional) The amount of time your Lambda Function has to run in seconds. Defaults to 60."
 }
 
 # variable "bucket" {

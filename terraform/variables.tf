@@ -23,6 +23,10 @@ variable "db_user" {
   description = "The username of the regular use used to to access the database by services"
 }
 
+variable "db_master_user" {
+  default = "postgres"
+}
+
 variable "db_master_password" {
   description = "Import this from secrets.tfvars using 'terraform apply -var-file=secrets.tfvars'"
 }
