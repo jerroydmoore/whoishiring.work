@@ -117,7 +117,7 @@ resource "aws_lambda_function" "function" {
 
   runtime     = "nodejs12.x"
   memory_size = 128
-  timeout     = 60
+  timeout     = var.timeout
 
   # work around for empty enirons for lambda functions
   # https://github.com/terraform-providers/terraform-provider-aws/issues/1110#issuecomment-515180315

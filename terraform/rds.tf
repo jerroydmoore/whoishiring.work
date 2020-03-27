@@ -9,7 +9,7 @@ resource "aws_db_instance" "rds" {
   allocated_storage     = 20
   max_allocated_storage = 1000
 
-  username = "postgres"
+  username = var.db_master_user
   password = var.db_master_password
 
   backup_retention_period = 7
