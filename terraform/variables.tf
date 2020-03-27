@@ -9,3 +9,7 @@ variable "aws_region" {
 variable "application_id" {
   default = "whoishiring.work"
 }
+
+variable "db_master_password" {
+  description = "Import this from secrets.tfvars using 'terraform apply -var-file=secrets.tfvars'"
+}
