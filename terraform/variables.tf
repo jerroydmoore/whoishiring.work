@@ -10,6 +10,10 @@ variable "application_id" {
   default = "whoishiring"
 }
 
+variable "frontend_s3_bucket" {
+  default = "www.whoishiring.work"
+}
+
 variable "db_name" {
   default = "whoishiring"
 }
