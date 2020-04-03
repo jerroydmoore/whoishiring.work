@@ -10,6 +10,10 @@ variable "application_id" {
   default = "whoishiring"
 }
 
+variable "api_stage_name" {
+  default = "prod"
+}
+
 variable "db_name" {
   default = "whoishiring"
 }
