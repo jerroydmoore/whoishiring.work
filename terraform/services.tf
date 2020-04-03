@@ -64,3 +64,26 @@ module "provision_db" {
     Application = var.application_id
   }
 }
+
+resource "aws_api_gateway_rest_api" "api_services" {
+  name        = "whoishiring-test"
+  description = "API for the whoishiring.work application"
+  endpoint_configuration {
+    types = ["REGIONAL"]
+  }
+  tags = {
+    Application = var.application_id
+  }
+}
+
+resource "aws_api_gateway_resource" "root" {
+  rest_api_id = aws_api_gateway_rest_api.api_services.id
+  parent_id   = aws_api_gateway_rest_api.api_services.root_resource_id
+  path_part   = "/"
+}
+
+resource "aws_api_gateway_resource" "default" {
+  rest_api_id = aws_api_gateway_rest_api.api_services.id
+  parent_id   = aws_api_gateway_resource.root.id
+  path_part   = "/{proxy+}"
+}

@@ -1,7 +1,7 @@
 const debug = require('debug')('app');
 const api = require('./hackerNewsApi');
 const transform = require('./transform');
-const { stories, posts, sequelize } = require('./models');
+const { stories, posts } = require('./models');
 
 const HOWMANY_STORIES = parseInt(process.env.HOWMANY_STORIES, 10) || 1;
 
@@ -84,8 +84,6 @@ module.exports.main = async function main() {
     debug('Done!');
   } catch (err) {
     console.error(`MAIN ERR ${err}. stack: ${err.stack}`);
-    process.exit(1);
-  } finally {
-    sequelize.close();
+    process.exitCode = 1;
   }
 };

@@ -55,11 +55,29 @@ Most items are deployed manually into AWS. This will be automated eventually.
 
 ```sh
 cd ./frontend
+npm ci
+GATSBY_API_URI="https://path.to/api" npm run build
 npm run deploy
 ```
 
 Note that the environment variable `GATSBY_API_URI` and
 your AWS credentials must be set in order to run the deploy script.
+
+#### Migration to Terraform
+
+Assume the npm ci has already run
+
+1. One job to zip and deploy the node_modules layers "node upload layers -f SERVICE"
+    The terraform archive_file can create this with the same sha256
+2. One job to zip and deploy lambda code to S3 "node upload code -f SERVICE"
+    The terraform archive_file can create this with the same sha256
+2. One job to deploy the infrastructure (api gateway, lambda, route53, sg, rds) "terraform"
+3. One job to deploy the S3 to lambda functions (or combine with #2?)
+
+### CI
+
+1. run audit in all folders of monorepo
+2. run tests in all folders of monorepo(?)
 
 ### Containerizing the frontend
 
