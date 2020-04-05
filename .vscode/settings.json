@@ -1,0 +1,14 @@
+{
+  "terraform.path": "terraform12",
+  "terraform.indexing": {
+    "enabled": false,
+    "exclude": [
+      ".terraform/**/*",
+      "**/.terraform/**/*"
+    ]
+  },
+  "terraform.languageServer": {
+    "enabled": true,
+    "args": []
+  }
+}
