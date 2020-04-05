@@ -14,6 +14,22 @@ variable "api_stage_name" {
   default = "prod"
 }
 
+variable "domain_name" {
+  default = "www.whoishiring.work"
+}
+
+variable cloudfront_price_class {
+  default = "PriceClass_100"
+}
+
+variable "cert_domain_name" {
+  default = "*.whoishiring.work"
+}
+
+variable "frontend_s3_bucket" {
+  default = "www.whoishiring.work"
+}
+
 variable "db_name" {
   default = "whoishiring"
 }

@@ -1,3 +1,11 @@
+variable "grant_assume_role_to_services" {
+  description = "(Optional) The principal service value granted for the sts:AssumeRole. Defaults to \"lambda.amazonaws.com\""
+  default     = "\"lambda.amazonaws.com\""
+}
+variable "publish" {
+  description = "(Optional) Whether to publish creation/change as new Lambda Function Version. Defaults to false."
+  default     = false
+}
 variable "name" {
   description = "(Required) A unique name for your Lambda Function"
 }
@@ -8,7 +16,7 @@ variable "prefix" {
 
 variable "description" {
   description = "(Optional) Description of what your Lambda Function does."
-  default = ""
+  default     = ""
 }
 
 variable "source_dir" {
@@ -29,12 +37,12 @@ variable "timeout" {
 # }
 
 variable "environment" {
-  type    = map(string)
-  default = null
+  type        = map(string)
+  default     = null
   description = "(Optional) The Lambda environment's configuration settings. "
 }
 
 variable "tags" {
-  default = {}
+  default     = {}
   description = "(Optional) A mapping of tags to assign to the object(s)"
 }

@@ -45,7 +45,7 @@ resource "aws_iam_role" "iam_for_lambda" {
     {
       "Action": "sts:AssumeRole",
       "Principal": {
-        "Service": "lambda.amazonaws.com"
+        "Service": ${var.grant_assume_role_to_services}
       },
       "Effect": "Allow",
       "Sid": ""
@@ -112,6 +112,7 @@ resource "aws_lambda_function" "function" {
   # s3_key    = aws_s3_bucket_object.source.key
   source_code_hash = data.archive_file.source.output_base64sha256
   handler          = var.handler
+  publish          = var.publish
 
   role = aws_iam_role.iam_for_lambda.arn
 

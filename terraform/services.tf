@@ -66,8 +66,8 @@ module "provision_db" {
 }
 
 resource "aws_api_gateway_rest_api" "api_services" {
-  name        = "whoishiring-test"
-  description = "API for the whoishiring.work application"
+  name        = "${var.application_id}-test"
+  description = "The API layer for ${var.domain_name}"
   endpoint_configuration {
     types = ["REGIONAL"]
   }
