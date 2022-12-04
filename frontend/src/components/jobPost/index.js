@@ -1,5 +1,6 @@
 import React from 'react';
 import { Accordion, Card, Button, Form } from 'react-bootstrap';
+import { useAccordionButton } from 'react-bootstrap/AccordionButton'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as far from '@fortawesome/free-regular-svg-icons';
@@ -8,6 +9,16 @@ import { Markup } from 'interweave';
 import BooleanUserAction from './BooleanUserAction';
 
 import { update as updateUserPost } from '../../services/userPost';
+
+const AccordionToggleBtn = ({ eventKey }) => (
+  <button
+    type="button"
+    variant="light" className="card-link"
+    onClick={useAccordionButton(eventKey)}
+  >
+    <FontAwesomeIcon icon={far.faStickyNote} /> Notes
+  </button>
+);
 
 const JobPost = ({ job }) => {
   console.log('JobPost render ' + JSON.stringify(job.userPosts));
@@ -18,9 +29,7 @@ const JobPost = ({ job }) => {
     <Card as="section" className="job-posting">
       <Accordion defaultActiveKey={job.userPosts.notes && '0'}>
         <Card.Body className="post-actionbar">
-          <Accordion.Toggle as={Button} variant="light" className="card-link" eventKey="0">
-            <FontAwesomeIcon icon={far.faStickyNote} /> Notes
-          </Accordion.Toggle>
+          <AccordionToggleBtn eventKey="0"/>
           <BooleanUserAction
             field="applied"
             value={job.userPosts.applied}

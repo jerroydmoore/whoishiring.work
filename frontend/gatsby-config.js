@@ -17,6 +17,7 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    `gatsby-plugin-image`,
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
     {
@@ -24,7 +25,7 @@ module.exports = {
       options: {
         name: title,
         short_name,
-        description: '',
+        description: 'foo',
         start_url: '/',
         background_color: '#FD6600',
         theme_color: '#FD6600',

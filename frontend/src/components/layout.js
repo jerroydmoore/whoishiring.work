@@ -8,7 +8,7 @@
 import React from 'react';
 import { useStaticQuery, graphql, Link } from 'gatsby';
 import PropTypes from 'prop-types';
-import Img from 'gatsby-image';
+import { GatsbyImage } from "gatsby-plugin-image"
 
 import './bootstrap.css';
 import './layout.css';
@@ -18,9 +18,7 @@ const Layout = ({ children }) => {
     query MyQuery {
       file(relativePath: { eq: "GitHub-icon.png" }) {
         childImageSharp {
-          fixed(width: 20, height: 20) {
-            ...GatsbyImageSharpFixed
-          }
+          gatsbyImageData(layout: FIXED, width: 20, height: 20)
         }
       }
     }
@@ -39,7 +37,7 @@ const Layout = ({ children }) => {
       <footer>
         <div className="footer">
           <a className="githubLink" href="https://github.com/jerroydmoore/whoishiring.work" rel="nofollow">
-            <Img fixed={data.file.childImageSharp.fixed} alt="GitHub" />
+            <GatsbyImage image={data.file.childImageSharp.gatsbyImageData} alt="GitHub" />
             <div>View the source code</div>
           </a>
         </div>
