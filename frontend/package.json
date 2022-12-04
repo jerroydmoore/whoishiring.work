@@ -33,7 +33,7 @@
     "gatsby-source-filesystem": "^5.2.0",
     "gatsby-transformer-sharp": "^5.2.0",
     "interweave": "^13.0.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "placeholder-loading": "^0.6.0",
     "prop-types": "^15.8.1",
     "query-string": "^7.1.3",
