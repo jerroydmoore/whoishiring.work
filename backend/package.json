@@ -15,7 +15,7 @@
   "dependencies": {
     "aws-serverless-express": "^3.3.6",
     "debug": "^4.1.1",
-    "express": "^4.17.1",
+    "express": "^4.18.2",
     "express-pino-logger": "^4.0.0",
     "pg": "^7.16.1",
     "pg-hstore": "^2.3.3",
