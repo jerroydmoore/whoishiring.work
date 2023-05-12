@@ -23,7 +23,7 @@ This is the both the present and WIP features list. If there are features you wa
 - [x] Update URLs for each month.
 - [x] Pagination.
 - [x] Client-side caching.
-- [ ] Deploy using terraform or cloudformation.
+- [x] Deploy using terraform or cloudformation.
 - [ ] Automate deployments within GitHub.
 - [x] Add search capability.
 - [x] Add filtering capabilities: on-site, new, noted, applied, hidden, etc.
@@ -47,19 +47,37 @@ The static assets from the frontend are copied into a S3 bucket with website cap
 
 One key limitation to hosting gatsbyJS projects in S3 buckets, is Cloudfront does not redirect urls with subfolders to the subfolder's index.html. This limitation was resolved using a Lambda@Edge function with a Cloudfront trigger to redirect urls missing the index.html.
 
-### Deploying to Production
+### Deploying
 
-Most items are deployed manually into AWS. This will be automated eventually.
+The infrastructure is deployed via terraform. The ACM certificate for *.whoishiring.work is deployed manually, so that the subdomains can be for different environments/apps.
 
 #### Deploying the Frontend
 
 ```sh
 cd ./frontend
+npm ci
+GATSBY_API_URI="https://path.to/api" npm run build
 npm run deploy
 ```
 
 Note that the environment variable `GATSBY_API_URI` and
 your AWS credentials must be set in order to run the deploy script.
+
+#### Migration to Terraform
+
+Assume the npm ci has already run
+
+1. One job to zip and deploy the node_modules layers "node upload layers -f SERVICE"
+    The terraform archive_file can create this with the same sha256
+2. One job to zip and deploy lambda code to S3 "node upload code -f SERVICE"
+    The terraform archive_file can create this with the same sha256
+2. One job to deploy the infrastructure (api gateway, lambda, route53, sg, rds) "terraform"
+3. One job to deploy the S3 to lambda functions (or combine with #2?)
+
+### CI
+
+1. run audit in all folders of monorepo
+2. run tests in all folders of monorepo(?)
 
 ### Containerizing the frontend
 
