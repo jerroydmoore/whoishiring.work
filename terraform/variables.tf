@@ -49,10 +49,12 @@ variable "db_master_user" {
 
 variable "db_master_password" {
   description = "Import this from secrets.tfvars using 'terraform apply -var-file=secrets.tfvars'"
+  sensitive   = true
 }
 
 variable "db_user_password" {
   description = "Import this from secrets.tfvars using 'terraform apply -var-file=secrets.tfvars'"
+  sensitive   = true
 }
 
 variable "howmany_stories" {
