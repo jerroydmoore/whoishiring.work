@@ -2,7 +2,7 @@ resource "aws_db_instance" "rds" {
   identifier = var.db_name
 
   engine         = "postgres"
-  engine_version = "11.5"
+  engine_version = "11.22"
   instance_class = "db.t2.micro"
 
   storage_type          = "gp2"

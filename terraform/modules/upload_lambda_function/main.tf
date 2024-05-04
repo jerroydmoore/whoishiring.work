@@ -116,7 +116,7 @@ resource "aws_lambda_function" "function" {
 
   role = aws_iam_role.iam_for_lambda.arn
 
-  runtime     = "nodejs12.x"
+  runtime     = "nodejs18.x"
   memory_size = 128
   timeout     = var.timeout
 
