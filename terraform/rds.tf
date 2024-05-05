@@ -1,8 +1,9 @@
 resource "aws_db_instance" "rds" {
   identifier = var.db_name
 
-  allow_major_version_upgrade = true
-  apply_immediately           = true
+  # Uncomment when performing major RDS upgrades
+  # allow_major_version_upgrade = true
+  # apply_immediately           = true
 
   engine         = "postgres"
   engine_version = "12.17"
