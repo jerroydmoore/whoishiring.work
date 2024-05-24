@@ -11,6 +11,8 @@ docker-compose up
 The frontend is served at <http://localhost:8000> and the backend is served at <http://localhost:8080>.
 The frontend container will live reload as you save your changes in the `./frontend` directory.
 
+You'll want to set environment variables `DB_ADMIN_PASSWORD` and `DB_ADMIN` using something like `direnv`.
+
 #### Limitations
 The populate-hn-data function only runs once, whereas it runs every 15 minutes in production. If you need fresher data, re-run the function locally or point your frontend to consume the production API endpoint.
 

@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   populate-hn-data:
     build: ./populate-hn-data
@@ -8,12 +6,12 @@ services:
     environment:
       - PGUSER=${DB_USER}
       - PGPASSWORD=${DB_USER_PASSWORD}
-      - PGHOST
+      - PGHOST=postgres
       - PGDATABASE
       - PGPORT
       - HOWMANY_STORIES=2
       - DEBUG
-      
+
   postgres:
     image: postgres:12
     environment:

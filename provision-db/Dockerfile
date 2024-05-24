@@ -1,19 +1,19 @@
-FROM mhart/alpine-node:12
+FROM node:18-bullseye
 
 ENV container=docker NODE_ENV=production
 WORKDIR /app
 
-RUN apk add --no-cache tini bash \
-    && addgroup -g 1000 node \
-    && adduser -u 1000 -G node -s /bin/sh -D node
-ENTRYPOINT ["/sbin/tini", "--"]
+RUN apt update && \
+  apt install tini && \
+  apt-get clean && \
+  rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["/usr/bin/tini", "--"]
 
 COPY package.json package-lock.json ./
 RUN npm ci --prod
 
 COPY wait-for-it.sh index.js cli.js ./
 RUN chmod +x wait-for-it.sh
-
-USER node
 
 CMD ./wait-for-it.sh $PGHOST:$PGPORT -- node cli.js

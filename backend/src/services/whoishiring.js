@@ -21,6 +21,9 @@ module.exports = {
     if (monthLabel === 'latest') {
       monthLabel = await this.getLatestMonthLabel();
     }
+    if (monthLabel === undefined) {
+      return [];
+    }
 
     // TODO: add index by monthId/monthLabel?
     return db.posts.findAll({

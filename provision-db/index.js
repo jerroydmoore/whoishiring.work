@@ -2,10 +2,14 @@ const { Client } = require('pg');
 
 async function createDatabaseIfNotExists(dbname) {
   let pg;
+
   try {
     // must connect to maintenance db in case $dbname database does not exist
     pg = new Client({ database: 'postgres' });
+
+    console.log('createDatabaseIfNotExists: connecting...');
     await pg.connect();
+    console.log('connected! checking if db exists...');
 
     const res = await pg.query(`SELECT FROM pg_database WHERE datname = '${dbname}'`);
 
@@ -14,12 +18,17 @@ async function createDatabaseIfNotExists(dbname) {
 
     if (!exists) {
       await pg.query(`CREATE DATABASE ${dbname}`);
+      console.log('Database created!');
     }
+  } catch (err) {
+    console.error(err);
+    process.exit(1);
   } finally {
     if (pg) {
       await pg.end();
       pg = undefined;
     }
+    console.log('createDatabaseIfNotExists fin');
   }
 }
 

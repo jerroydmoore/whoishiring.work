@@ -15,9 +15,8 @@
   "dependencies": {
     "debug": "^4.1.1",
     "node-fetch": "^2.6.0",
-    "pg": "^7.16.1",
+    "pg": "^8.11.5",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.3"
-  },
-  "devDependencies": {}
+  }
 }

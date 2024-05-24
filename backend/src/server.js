@@ -1,4 +1,5 @@
 if (process.env.LOAD_ENV_FILE) {
+  // eslint-disable-next-line no-console
   console.dir(process.env);
   require('dotenv').config({ path: '../.env' });
 }

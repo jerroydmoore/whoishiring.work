@@ -11,7 +11,10 @@
     "node": true,
     "jest/globals": true
   },
-  "ignorePatterns": [ "node_modules/"],
+  "ignorePatterns": [
+    "node_modules/",
+    "public"
+  ],
   "rules": {
     "import/no-commonjs": 0,
     "import/no-nodejs-modules": 0,

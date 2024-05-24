@@ -6,6 +6,7 @@ const sequelize = new Sequelize(process.env.PGDATABASE, process.env.DB_USER, pro
   dialect: 'postgres',
 
   // see: https://github.com/sequelize/sequelize/issues/8615
+  // eslint-disable-next-line no-console
   logging: debug.enabled && console.log,
 });
 
