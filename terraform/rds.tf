@@ -1,13 +1,13 @@
 resource "aws_db_instance" "rds" {
   identifier = var.db_name
 
-  # Uncomment when performing major RDS upgrades
-  # allow_major_version_upgrade = true
-  # apply_immediately           = true
+  # Should comment by default; And, Only uncomment when performing major RDS upgrades
+  allow_major_version_upgrade = true
+  apply_immediately           = true
 
   engine         = "postgres"
-  engine_version = "12.17"
-  instance_class = "db.t2.micro"
+  engine_version = "13.16"
+  instance_class = "db.t3.micro"
 
   storage_type          = "gp2"
   allocated_storage     = 20
