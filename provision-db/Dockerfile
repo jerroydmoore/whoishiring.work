@@ -1,4 +1,4 @@
-FROM node:18-bullseye
+FROM node:24-bullseye
 
 ENV container=docker NODE_ENV=production
 WORKDIR /app

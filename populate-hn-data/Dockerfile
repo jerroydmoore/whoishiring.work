@@ -1,5 +1,5 @@
 # This stage installs our modules
-FROM node:18-bullseye
+FROM node:24-bullseye
 
 ENV container=docker NODE_ENV=production
 WORKDIR /app
@@ -8,7 +8,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --prod
 
 # Then we copy over the modules from above onto a `slim` image
-FROM node:18-bullseye-slim
+FROM node:24-bullseye-slim
 
 COPY wait-for-it.sh .
 RUN chmod +x ./wait-for-it.sh

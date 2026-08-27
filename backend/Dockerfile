@@ -1,5 +1,5 @@
 # This stage installs our modules
-FROM node:18-bullseye
+FROM node:24-bullseye
 
 ENV container=docker NODE_ENV=production
 WORKDIR /app
@@ -27,7 +27,7 @@ COPY ./src ./src/
 
 CMD ./wait-for-it.sh $PGHOST:$PGPORT -- node ./src/server.js
 
-FROM node:18-bullseye AS develop
+FROM node:24-bullseye AS develop
 
 WORKDIR /app
 

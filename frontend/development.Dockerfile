@@ -15,7 +15,7 @@
 # It appears a subprocess of gatsby is scanning the /proc/<PID>/map_files/ directory,
 # which stores symlinks a process is using (See <https://lwn.net/Articles/525721/>)
 
-FROM node:18
+FROM node:24
 
 # NODE_ENV=production causes `gatsby develop` to complain
 ENV container=docker
