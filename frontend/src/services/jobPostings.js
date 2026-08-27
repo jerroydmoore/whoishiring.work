@@ -51,9 +51,7 @@ function filterPosts(filterFlags, searchPattern) {
 }
 
 const getLatest = fetch(`${API_URI}/v1/whoishiring/latest`)
-  .then((response) => {
-    return response.json();
-  })
+  .then((response) => response.json())
   .then((results) => {
     months = results.months;
     jobPostings.set(months[0], getLatest);
@@ -85,6 +83,8 @@ export async function getMonths() {
   return months;
 }
 
+const randomWait = () => new Promise((resolve) => setTimeout(resolve, Math.floor(Math.random() * 1000)));
+
 // TODO save this to the db
 export async function updateUserJobPostField(month, postId, field, value) {
   if (!jobPostings.has(month)) {
@@ -103,7 +103,6 @@ export async function updateUserJobPostField(month, postId, field, value) {
   post.userPosts[field] = value;
   return true;
 }
-const randomWait = () => new Promise((resolve) => setTimeout(resolve, Math.floor(Math.random() * 1000)));
 
 export async function getJobPostings({ month, page, hitsPerPage, sort, searchPattern, filterFlags }) {
   if (page < 1) {
@@ -122,6 +121,7 @@ export async function getJobPostings({ month, page, hitsPerPage, sort, searchPat
     promise = _getJobPostings(month);
     jobPostings.set(month, promise);
   }
+  // eslint-disable-next-line prefer-const
   let { posts, postsTotal } = await promise;
 
   const start = (page - 1) * hitsPerPage;
@@ -138,9 +138,8 @@ export async function getJobPostings({ month, page, hitsPerPage, sort, searchPat
       return a.localeCompare(b, { sensitivity: 'base', ignorePunctuation: true });
     } else if (typeof a === 'number' || a instanceof Date) {
       return a - b;
-    } else {
-      throw new Error(`${typeof a} is unsortable`);
     }
+    throw new Error(`${typeof a} is unsortable`);
   });
   if (descending) {
     posts.reverse();

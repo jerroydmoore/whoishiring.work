@@ -33,7 +33,9 @@ services:
       - PGPORT
 
   backend:
-    build: ./backend
+    build:
+      context: ./backend
+      target: develop
     depends_on: 
       - "populate-hn-data"
     environment: 
@@ -44,6 +46,11 @@ services:
       - PGPORT
     ports:
       - "8080:8080"
+      - "9229:9229" # inspect debugging port
+    command: './wait-for-it.sh $PGHOST:$PGPORT -- node --inspect ./src/server.js'
+    volumes:
+      - "./backend/src:/src"
+
   frontend:
     build:
       context: ./frontend

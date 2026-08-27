@@ -26,3 +26,11 @@ ENTRYPOINT ["/usr/bin/tini", "--"]
 COPY ./src ./src/
 
 CMD ./wait-for-it.sh $PGHOST:$PGPORT -- node ./src/server.js
+
+FROM node:18-bullseye AS develop
+
+WORKDIR /app
+
+RUN npm install -g nodemon
+COPY --from=0 /app .
+CMD ./wait-for-it.sh $PGHOST:$PGPORT -- nodemon --inspect ./src/server.js

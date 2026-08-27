@@ -30,19 +30,17 @@ const FilterControls = ({ onChange, searchPattern: initialSearchPattern, sort, f
     { label: 'Internships available', field: 'intern' },
     { label: 'Visa', field: 'visa' },
     // TODO add more checkboxes to sort by
-  ].map(({ label, field }) => {
-    return (
-      <Form.Check
-        type="checkbox"
-        key={field}
-        label={label}
-        id={`${field}FilterCheckbox`}
-        checked={filterFlags[field]}
-        onChange={() => onFilterClick(field)}
-        inline
-      />
-    );
-  });
+  ].map(({ label, field }) => (
+    <Form.Check
+      type="checkbox"
+      key={field}
+      label={label}
+      id={`${field}FilterCheckbox`}
+      checked={filterFlags[field]}
+      onChange={() => onFilterClick(field)}
+      inline
+    />
+  ));
 
   const onSortClick = (field) => {
     isDesc = sort === field ? !isDesc : false;

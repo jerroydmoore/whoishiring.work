@@ -3,7 +3,7 @@ import { Accordion, Card, Form } from 'react-bootstrap';
 import { useAccordionButton } from 'react-bootstrap/AccordionButton';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as far from '@fortawesome/free-regular-svg-icons';
+import { faStickyNote, faCheckSquare, faSquare } from '@fortawesome/free-regular-svg-icons';
 import { Markup } from 'interweave';
 
 import BooleanUserAction from './BooleanUserAction';
@@ -11,8 +11,8 @@ import BooleanUserAction from './BooleanUserAction';
 import { update as updateUserPost } from '../../services/userPost';
 
 const AccordionToggleBtn = ({ eventKey }) => (
-  <button type="button" variant="light" className="card-link" onClick={useAccordionButton(eventKey)}>
-    <FontAwesomeIcon icon={far.faStickyNote} /> Notes
+  <button type="button" className="card-link" onClick={useAccordionButton(eventKey)}>
+    <FontAwesomeIcon icon={faStickyNote} /> Notes
   </button>
 );
 
@@ -29,8 +29,8 @@ const JobPost = ({ job }) => {
           <BooleanUserAction
             field="applied"
             value={job.userPosts.applied}
-            trueIcon={far.faCheckSquare}
-            falseIcon={far.faSquare}
+            trueIcon={faCheckSquare}
+            falseIcon={faSquare}
             trueLabel="Un-Mark as Applied"
             falseLabel="Mark as Applied"
             onClick={updateUserPostField}

@@ -4,6 +4,7 @@ import React from 'react';
 import { Location } from '@gatsbyjs/reach-router';
 import queryString from 'query-string';
 
+// eslint-disable-next-line react/display-name
 const withLocation = (ComponentToWrap) => (props) => (
   <Location>
     {({ location, navigate }) => (

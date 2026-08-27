@@ -8,10 +8,8 @@ const Pagination = ({ active, max, onChange }) => {
   if (max === 1) {
     return null;
   }
-  const changeBy = (delta) => {
-    return () => {
-      onChange(active + delta);
-    };
+  const changeBy = (delta) => () => {
+    onChange(active + delta);
   };
   const onInput = (event) => {
     if (digitRegex.test(event.target.value)) {
