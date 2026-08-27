@@ -5,7 +5,7 @@ Runs the [whoishiring.work](https://www.whoishiring.work).
 ## Getting Started for Local Development
 
 ```sh
-docker-compose up
+docker compose up
 ```
 
 The frontend is served at <http://localhost:8000> and the backend is served at <http://localhost:8080>.
